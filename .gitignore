@@ -22,3 +22,9 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# Content generation pipeline (local only — not needed to build/deploy the site)
+scripts/
+
+# Legacy PNG drawings (site serves .webp)
+public/drawings/*.png

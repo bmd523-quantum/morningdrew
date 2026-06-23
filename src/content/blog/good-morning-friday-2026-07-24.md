@@ -2,7 +2,7 @@
 title: 'Good Morning — Happy Friday'
 description: 'A retro hand-drawn good morning friday picture from a peaceful campsite at dawn. A fresh original image to save and share.'
 pubDate: '2026-07-24'
-heroImage: '/drawings/good-morning-friday-2026-07-24.png'
+heroImage: '/drawings/good-morning-friday-2026-07-24.webp'
 theme: 'camp'
 ---
 

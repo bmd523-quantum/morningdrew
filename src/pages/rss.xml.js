@@ -22,7 +22,7 @@ export async function GET(context) {
       enclosure: {
         url: new URL(post.data.heroImage, context.site).href,
         length: 0,
-        type: 'image/png',
+        type: 'image/webp',
       },
     })),
   });

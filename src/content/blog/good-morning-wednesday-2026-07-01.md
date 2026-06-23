@@ -2,7 +2,7 @@
 title: 'Good Morning — Happy Wednesday'
 description: 'A retro hand-drawn good morning wednesday picture with a cozy breakfast table. A fresh original image to save and share.'
 pubDate: '2026-07-01'
-heroImage: '/drawings/good-morning-wednesday-2026-07-01.png'
+heroImage: '/drawings/good-morning-wednesday-2026-07-01.webp'
 theme: 'breakfast'
 ---
 
