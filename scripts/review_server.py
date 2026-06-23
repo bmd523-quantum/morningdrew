@@ -14,7 +14,8 @@ done, click "Publish approved" once — the server composites the headline,
 writes the PNGs to ../public/drawings/, the posts to ../src/content/blog/,
 and pins.csv. Then just: git add . ; git commit ; git push.
 
-Rejects simply stay in review (nothing is deleted). Ctrl+C to stop.
+Reject deletes the PNG and resets the day to planned (re-run generate_month.py
+to recreate). Ctrl+C to stop.
 
 Reuses all the publishing logic from publish_approved.py.
 """
@@ -36,6 +37,18 @@ def load_manifest():
 
 def save_manifest(m):
     MANIFEST.write_text(json.dumps(m, indent=2), encoding="utf-8")
+
+def reject_entry(manifest, date_str):
+    for e in manifest:
+        if e["date"] != date_str:
+            continue
+        e["approved"] = False
+        e["status"] = "planned"
+        png = REVIEW / e["file"]
+        if png.exists():
+            png.unlink()
+        return True
+    return False
 
 def publish_all(manifest):
     DRAWINGS.mkdir(parents=True, exist_ok=True)
@@ -86,6 +99,7 @@ def render_page(manifest):
  .meta{padding:10px 12px;font-size:13px}.theme{background:#f1e8da;border-radius:6px;padding:1px 7px;font-size:12px}
  .row{display:flex;gap:8px;padding:0 12px 12px}.row button{flex:1}
  .card.ok{outline:3px solid #3aa55d}
+ .row button.reject{color:#a33;border-color:#d4a0a0}
  .pub{padding:0 12px 10px;font-size:12px;color:#3aa55d;font-weight:600}
 </style></head><body>
 <header><h1>goodmorning.pics review</h1><span class="count" id="c"></span>
@@ -102,12 +116,16 @@ function render(){const g=document.getElementById('g');g.innerHTML='';
    `<div class="ph">${p.theme}<br>${p.scene||''}<br><i>(not generated)</i></div>`;
   c.innerHTML=img+`<div class="meta"><b>${p.weekday}</b> &middot; ${p.date}<br>
    <span class="theme">${p.theme}</span></div>`+
-   (gen?`<div class="row"><button onclick="set(${i},${!p.approved})">${p.approved?'Approved \u2713':'Approve'}</button></div>`:'');
+   (gen?`<div class="row"><button onclick="set(${i},${!p.approved})">${p.approved?'Approved \u2713':'Approve'}</button>
+   <button class="reject" onclick="reject(${i})">Reject</button></div>`:'');
   g.appendChild(c);});
  document.getElementById('c').textContent=M.filter(p=>p.approved).length+' approved';}
 async function set(i,v){M[i].approved=v;render();
  await fetch('/approve',{method:'POST',headers:{'Content-Type':'application/json'},
   body:JSON.stringify({date:M[i].date,approved:v})});}
+async function reject(i){M[i].approved=false;M[i].status='planned';render();
+ await fetch('/reject',{method:'POST',headers:{'Content-Type':'application/json'},
+  body:JSON.stringify({date:M[i].date})});}
 async function all(v){for(const p of M){if(p.status==='generated')p.approved=v;}render();
  await fetch('/approve',{method:'POST',headers:{'Content-Type':'application/json'},
   body:JSON.stringify({all:true,approved:v})});}
@@ -153,6 +171,13 @@ class Handler(http.server.BaseHTTPRequestHandler):
                     if e["date"] == req.get("date"): e["approved"] = bool(req["approved"])
             save_manifest(m)
             self._send(200, json.dumps({"ok": True}), "application/json")
+        elif self.path == "/reject":
+            req = json.loads(raw or b"{}")
+            m = load_manifest()
+            ok = reject_entry(m, req.get("date"))
+            if ok:
+                save_manifest(m)
+            self._send(200, json.dumps({"ok": ok}), "application/json")
         elif self.path == "/publish":
             n, errors = publish_all(load_manifest())
             self._send(200, json.dumps({"published": n, "errors": errors}), "application/json")
@@ -164,7 +189,7 @@ def main():
         raise SystemExit("No manifest.json — run generate_month.py first.")
     with socketserver.ThreadingTCPServer(("127.0.0.1", PORT), Handler) as httpd:
         print(f"Review at: http://localhost:{PORT}")
-        print("Approve the ones you like, click 'Publish approved', then git push. Ctrl+C to stop.")
+        print("Approve the ones you like, Reject to delete and regenerate later, then Publish approved. Ctrl+C to stop.")
         try:
             httpd.serve_forever()
         except KeyboardInterrupt:

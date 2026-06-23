@@ -14,12 +14,13 @@ overlay (added later), every pin is visually distinct.
   python generate_month.py --year 2026 --month 7 --dry-run   # free preview
   python generate_month.py --year 2026 --month 7 --limit 3   # cheap test
   python generate_month.py --year 2026 --month 7             # full month
+  python generate_month.py --start 2026-06-23 --end 2026-07-01  # date range
 
 Requires: pip install -r requirements.txt   and   OPENAI_API_KEY set.
 """
 
 import argparse, base64, calendar, json, os, sys, time
-from datetime import date
+from datetime import date, timedelta
 from pathlib import Path
 
 # ---------------------------------------------------------------- config
@@ -138,10 +139,15 @@ def scene_for(d: date, theme: str) -> str:
     # consecutive same-weekdays (7 days apart) land on different scenes.
     return pool[d.toordinal() % len(pool)]
 
-def build_plan(year: int, month: int):
+def iter_dates(start: date, end: date):
+    d = start
+    while d <= end:
+        yield d
+        d += timedelta(days=1)
+
+def build_plan_for_dates(dates):
     plan = []
-    for day in range(1, calendar.monthrange(year, month)[1] + 1):
-        d = date(year, month, day)
+    for d in dates:
         theme = theme_for(d)
         scene = scene_for(d, theme)
         plan.append({
@@ -155,6 +161,10 @@ def build_plan(year: int, month: int):
             "approved": False,
         })
     return plan
+
+def build_plan(year: int, month: int):
+    last = calendar.monthrange(year, month)[1]
+    return build_plan_for_dates(iter_dates(date(year, month, 1), date(year, month, last)))
 
 # ---------------------------------------------------------------- generation
 def generate(entry, client):
@@ -215,16 +225,36 @@ render();</script></body></html>"""
     (REVIEW_DIR / "review.html").write_text(html.replace("__DATA__", data), encoding="utf-8")
 
 # ---------------------------------------------------------------- main
+def parse_date(s: str) -> date:
+    try:
+        return date.fromisoformat(s)
+    except ValueError:
+        raise argparse.ArgumentTypeError(f"invalid date {s!r} — use YYYY-MM-DD")
+
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--year", type=int, required=True)
-    ap.add_argument("--month", type=int, required=True)
+    ap.add_argument("--year", type=int)
+    ap.add_argument("--month", type=int)
+    ap.add_argument("--start", type=parse_date, help="first date (YYYY-MM-DD)")
+    ap.add_argument("--end", type=parse_date, help="last date (YYYY-MM-DD)")
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--dry-run", action="store_true")
     args = ap.parse_args()
 
+    if args.start or args.end:
+        if not (args.start and args.end):
+            ap.error("--start and --end must be used together")
+        if args.year or args.month:
+            ap.error("use either --year/--month or --start/--end, not both")
+        if args.end < args.start:
+            ap.error("--end must be on or after --start")
+        plan = build_plan_for_dates(iter_dates(args.start, args.end))
+    elif args.year and args.month:
+        plan = build_plan(args.year, args.month)
+    else:
+        ap.error("provide --year and --month, or --start and --end")
+
     REVIEW_DIR.mkdir(exist_ok=True)
-    plan = build_plan(args.year, args.month)
 
     if not args.dry_run:
         try:
