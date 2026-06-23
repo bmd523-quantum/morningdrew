@@ -1,14 +1,17 @@
 ---
-// Place at: src/components/Header.astro (replaces the stock file)
-// Title pulls from SITE_TITLE so it reads "Good Morning Pics". The stock
-// Astro social icons are removed; nav kept simple.
+// Place at: src/components/Header.astro (replaces current)
+// Logo + "Good Morning Pics" wordmark, linked home. Put the logo at
+// public/logo.png (transparent background looks cleanest on the white bar).
 import HeaderLink from './HeaderLink.astro';
 import { SITE_TITLE } from '../consts';
 ---
 
 <header>
 	<nav>
-		<h2><a href="/">{SITE_TITLE}</a></h2>
+		<a href="/" class="brand">
+			<img src="/logo.png" alt="" class="logo" width="40" height="40" />
+			<span>{SITE_TITLE}</span>
+		</a>
 		<div class="internal-links">
 			<HeaderLink href="/">Home</HeaderLink>
 			<HeaderLink href="/coffee/">Coffee</HeaderLink>
@@ -19,20 +22,21 @@ import { SITE_TITLE } from '../consts';
 </header>
 <style>
 	header {
-		margin: 0;
-		padding: 0 1em;
-		background: white;
+		margin: 0; padding: 0 1em; background: white;
 		box-shadow: 0 2px 8px rgba(var(--black), 5%);
 	}
-	h2 { margin: 0; font-size: 1em; }
-	h2 a, h2 a.active { text-decoration: none; }
 	nav {
 		display: flex; align-items: center; justify-content: space-between;
-		max-width: 1000px; margin: 0 auto;
+		max-width: 1000px; margin: 0 auto; flex-wrap: wrap;
 	}
-	nav a { padding: 1em 0.5em; color: var(--black); text-decoration: none; }
+	.brand {
+		display: flex; align-items: center; gap: 0.55em;
+		text-decoration: none; color: var(--black);
+		padding: 0.5em 0; font-weight: 700; font-size: 1.15em;
+	}
+	.logo { display: block; border-radius: 8px; }
 	.internal-links { display: flex; gap: 0.25em; flex-wrap: wrap; }
 	@media (max-width: 720px) {
-		nav { flex-direction: column; gap: 0.25em; padding: 0.5em 0; }
+		nav { justify-content: center; gap: 0.25em; padding: 0.5em 0; }
 	}
 </style>

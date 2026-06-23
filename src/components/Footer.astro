@@ -1,5 +1,6 @@
 ---
-// Place at: src/components/Footer.astro (replaces the stock file)
+// Place at: src/components/Footer.astro (replaces current)
+// Copyright tied to BrianOnAI LLC; the three brand links stay.
 import { FOOTER_BRANDS } from '../consts';
 const today = new Date();
 ---
@@ -8,7 +9,9 @@ const today = new Date();
 	<nav class="footer-brands">
 		{FOOTER_BRANDS.map((b) => <a href={b.url} rel="noopener">{b.name}</a>)}
 	</nav>
-	<p class="copyright">&copy; {today.getFullYear()} Good Morning Pics. A new drawing every morning.</p>
+	<p class="copyright">
+		&copy; {today.getFullYear()} Good Morning Pics, a BrianOnAI LLC project. All rights reserved.
+	</p>
 </footer>
 <style>
 	footer {
