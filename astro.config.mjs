@@ -9,7 +9,35 @@ import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   site: 'https://goodmorning.pics',
-  integrations: [mdx(), sitemap()],
+  integrations: [
+    mdx(),
+    sitemap({
+      changefreq: 'weekly',
+      priority: 0.7,
+      lastmod: new Date(),
+      serialize(item) {
+        const path = new URL(item.url).pathname;
+        if (path === '/') {
+          return { ...item, changefreq: 'daily', priority: 1.0 };
+        }
+        if (path.startsWith('/blog/good-morning')) {
+          return { ...item, changefreq: 'monthly', priority: 0.8 };
+        }
+        if (path === '/blog/' || path === '/blog') {
+          return { ...item, changefreq: 'daily', priority: 0.9 };
+        }
+        if (path.startsWith('/monday') || path.startsWith('/tuesday') ||
+            path.startsWith('/wednesday') || path.startsWith('/thursday') ||
+            path.startsWith('/friday') || path.startsWith('/saturday') ||
+            path.startsWith('/sunday') || path.startsWith('/coffee') ||
+            path.startsWith('/sunrise') || path.startsWith('/breakfast') ||
+            path.startsWith('/camp') || path.startsWith('/motivation')) {
+          return { ...item, changefreq: 'weekly', priority: 0.75 };
+        }
+        return item;
+      },
+    }),
+  ],
   fonts: [
     {
       provider: fontProviders.google(),

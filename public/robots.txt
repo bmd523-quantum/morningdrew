@@ -1,3 +1,6 @@
+# Good Morning Pics — https://goodmorning.pics
+# Daily hand-drawn good morning art. LLM summary: /llms.txt
+
 User-agent: *
 Allow: /
 
