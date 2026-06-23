@@ -22,6 +22,8 @@ export const GET: APIRoute = async () => {
 		`- [Home](${SITE_URL}/): Today's featured drawing and browse hubs.`,
 		`- [All mornings](${SITE_URL}/blog/): Full archive of published drawings.`,
 		`- [About](${SITE_URL}/about/): About Good Morning Pics and the daily art.`,
+		`- [Contact](${SITE_URL}/contact/): Email hello@goodmorning.pics.`,
+		`- [Privacy](${SITE_URL}/privacy/): Privacy policy for the site.`,
 		`- [RSS feed](${SITE_URL}/rss.xml): Feed with image enclosures for Pinterest automation.`,
 		'',
 		'## Browse by mood',

@@ -1,6 +1,6 @@
 ---
 // Place at: src/components/Footer.astro (replaces current)
-// Copyright tied to BrianOnAI LLC; the three brand links stay.
+// Brand links + legal/contact links + BrianOnAI copyright.
 import { FOOTER_BRANDS } from '../consts';
 const today = new Date();
 ---
@@ -8,6 +8,11 @@ const today = new Date();
 <footer>
 	<nav class="footer-brands">
 		{FOOTER_BRANDS.map((b) => <a href={b.url} rel="noopener">{b.name}</a>)}
+	</nav>
+	<nav class="footer-legal">
+		<a href="/about/">About</a>
+		<a href="/contact/">Contact</a>
+		<a href="/privacy/">Privacy</a>
 	</nav>
 	<p class="copyright">
 		&copy; {today.getFullYear()} Good Morning Pics, a BrianOnAI LLC project. All rights reserved.
@@ -22,11 +27,17 @@ const today = new Date();
 	}
 	.footer-brands {
 		display: flex; justify-content: center; flex-wrap: wrap;
-		gap: 1.25em; margin-bottom: 1em;
+		gap: 1.25em; margin-bottom: 0.75em;
 	}
 	.footer-brands a {
 		color: rgb(var(--gray-dark)); font-weight: 600; text-decoration: none;
 	}
 	.footer-brands a:hover { text-decoration: underline; }
+	.footer-legal {
+		display: flex; justify-content: center; flex-wrap: wrap;
+		gap: 1em; margin-bottom: 1em; font-size: 0.9em;
+	}
+	.footer-legal a { color: rgb(var(--gray)); text-decoration: none; }
+	.footer-legal a:hover { text-decoration: underline; }
 	.copyright { margin: 0; font-size: 0.9em; }
 </style>

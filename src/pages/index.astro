@@ -25,8 +25,9 @@ const featured =
 const recent = published
   .filter((p) => p !== featured)
   .slice(0, 6);
-const themeRep = (hub) => published.find((p) => hub.themes.includes(p.data.theme));
-const dayRep = (hub) => published.find((p) => DAYS[p.data.pubDate.getUTCDay()] === hub.weekday);
+// Hub tiles show the latest example per theme/weekday (including scheduled posts).
+const themeRep = (hub) => posts.find((p) => hub.themes.includes(p.data.theme));
+const dayRep = (hub) => posts.find((p) => DAYS[p.data.pubDate.getUTCDay()] === hub.weekday);
 const featuredPageUrl = featured
   ? new URL(`/blog/${featured.id}/`, Astro.site).href
   : '';

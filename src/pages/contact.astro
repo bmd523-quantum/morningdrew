@@ -1,0 +1,39 @@
+---
+// Place at: src/pages/contact.astro
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE } from '../consts';
+---
+
+<html lang="en">
+  <head>
+    <BaseHead title={`Contact | ${SITE_TITLE}`} description="Get in touch with Good Morning Pics." />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <h1>Contact</h1>
+      <p>
+        We'd love to hear from you. Whether it's a question, a kind word, a request to use one
+        of our images, or a business inquiry, drop us a line.
+      </p>
+      <p class="email">
+        <a href="mailto:hello@goodmorning.pics">hello@goodmorning.pics</a>
+      </p>
+      <p>
+        Good Morning Pics is operated by BrianOnAI LLC. New original morning art is posted every
+        day — <a href="/">browse the latest</a> or follow along on Pinterest.
+      </p>
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style>
+  main { width: 720px; max-width: calc(100% - 2em); margin: auto; padding: 2em 1em; }
+  h1 { margin: 0 0 0.5em; }
+  p { color: rgb(var(--gray-dark)); line-height: 1.7; }
+  .email { font-size: 1.3em; font-weight: 700; margin: 1em 0; }
+  .email a { color: var(--accent); }
+</style>
