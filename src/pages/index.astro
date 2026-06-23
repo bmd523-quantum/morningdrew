@@ -96,7 +96,7 @@ const dayRep = (hub) => posts.find((p) => DAYS[p.data.pubDate.getUTCDay()] === h
   .hero-text p { color: rgb(var(--gray)); font-size: 1.1em; max-width: 40ch; }
   .hero-img { display: block; text-decoration: none; color: inherit; }
   .hero-img img {
-    width: 100%; aspect-ratio: 2 / 3; object-fit: cover; max-height: 520px;
+    width: 100%; aspect-ratio: 2 / 3; object-fit: cover;
     border-radius: 16px; box-shadow: var(--box-shadow);
   }
   .hero-img span { display: block; margin-top: 0.5em; color: rgb(var(--gray)); font-size: 0.95em; }
@@ -104,7 +104,7 @@ const dayRep = (hub) => posts.find((p) => DAYS[p.data.pubDate.getUTCDay()] === h
   .tiles { display: grid; gap: 1.1em; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
   .tile { display: block; text-decoration: none; color: inherit; text-align: center; }
   .tile img, .ph {
-    width: 100%; aspect-ratio: 1 / 1; object-fit: cover;
+    width: 100%; aspect-ratio: 2 / 3; object-fit: cover;
     border-radius: 12px; box-shadow: var(--box-shadow);
   }
   .ph { background: rgb(var(--gray-light)); }

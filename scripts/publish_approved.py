@@ -118,22 +118,39 @@ def centered(draw, y, text, font, fill, stroke_fill, stroke=4):
     draw.text(((FINAL_W - w) / 2, y), text, font=font, fill=fill,
               stroke_width=stroke, stroke_fill=stroke_fill)
 
+def fit_font(names, text, max_width, start, min_size=64):
+    """Shrink the font until `text` fits within max_width — so long day names
+    (Wednesday/Thursday/Saturday) stay on one line with margin."""
+    size = start
+    while size > min_size:
+        f = load_font(names, size)
+        if f.getlength(text) <= max_width:
+            return f
+        size -= 4
+    return load_font(names, min_size)
+
 def compose(src: Path, weekday: str) -> Image.Image:
     img = Image.open(src).convert("RGBA").resize((FINAL_W, FINAL_H), Image.LANCZOS)
+    # Deeper top scrim so the nudged-down headline stays legible.
     scrim = Image.new("RGBA", img.size, (0, 0, 0, 0))
     sd = ImageDraw.Draw(scrim)
-    band = int(FINAL_H * 0.34)
+    band = int(FINAL_H * 0.40)
     for i in range(band):
-        a = int(150 * (1 - i / band))
+        a = int(160 * (1 - i / band))
         sd.line([(0, i), (FINAL_W, i)], fill=(255, 252, 246, a))
     img = Image.alpha_composite(img, scrim)
     d = ImageDraw.Draw(img)
-    script = load_font(["script.ttf", "Caveat.ttf"], 96)
-    head   = load_font(["headline.ttf", "Fredoka.ttf"], 120)
-    mark   = load_font(["headline.ttf", "Fredoka.ttf"], 38)
+
     ink, halo = (58, 46, 37, 255), (255, 255, 255, 230)
-    centered(d, 70,  "Good morning", script, ink, halo, 4)
-    centered(d, 185, f"Happy {weekday}", head, ink, halo, 5)
+    script = load_font(["script.ttf", "Caveat.ttf"], 92)
+    mark   = load_font(["headline.ttf", "Fredoka.ttf"], 38)
+    # Headline auto-fits to ~84% width so the longest day still has margin.
+    head = fit_font(["headline.ttf", "Fredoka.ttf"], f"Happy {weekday}", int(FINAL_W * 0.84), 120)
+
+    # Nudged down from the very top edge.
+    centered(d, 120, "Good morning", script, ink, halo, 4)
+    centered(d, 235, f"Happy {weekday}", head, ink, halo, 5)
+
     wmw = d.textlength(WORDMARK, font=mark)
     d.text(((FINAL_W - wmw) / 2, FINAL_H - 80), WORDMARK, font=mark,
            fill=(58, 46, 37, 220), stroke_width=3, stroke_fill=(255, 255, 255, 200))
