@@ -6,6 +6,7 @@ import { getCollection } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import ShareButtons from '../components/ShareButtons.astro';
 import { HUBS, DAY_HUBS } from '../hubs';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 
@@ -13,10 +14,25 @@ const DAYS = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Satur
 const posts = (await getCollection('blog')).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
-const featured = posts[0];
-const recent = posts.slice(1, 7);
-const themeRep = (hub) => posts.find((p) => hub.themes.includes(p.data.theme));
-const dayRep = (hub) => posts.find((p) => DAYS[p.data.pubDate.getUTCDay()] === hub.weekday);
+
+// pubDate is UTC midnight for each calendar day — match "today" on that axis,
+// and never surface future posts as "Today" (a whole month may be pre-published).
+const utcDay = (d: Date) => Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate());
+const todayKey = utcDay(new Date());
+const published = posts.filter((p) => utcDay(p.data.pubDate) <= todayKey);
+const featured =
+  published.find((p) => utcDay(p.data.pubDate) === todayKey) ?? published[0];
+const recent = published
+  .filter((p) => p !== featured)
+  .slice(0, 6);
+const themeRep = (hub) => published.find((p) => hub.themes.includes(p.data.theme));
+const dayRep = (hub) => published.find((p) => DAYS[p.data.pubDate.getUTCDay()] === hub.weekday);
+const featuredPageUrl = featured
+  ? new URL(`/blog/${featured.id}/`, Astro.site).href
+  : '';
+const featuredImageUrl = featured
+  ? new URL(featured.data.heroImage, Astro.site).href
+  : '';
 ---
 
 <html lang="en">
@@ -32,10 +48,19 @@ const dayRep = (hub) => posts.find((p) => DAYS[p.data.pubDate.getUTCDay()] === h
           <p>Original hand-drawn good morning pictures — a new one each morning, for every day of the week.</p>
         </div>
         {featured && (
-          <a href={`/blog/${featured.id}/`} class="hero-img">
-            <img src={featured.data.heroImage} alt={featured.data.title} />
-            <span>Today &middot; {featured.data.title}</span>
-          </a>
+          <div class="hero-featured">
+            <a href={`/blog/${featured.id}/`} class="hero-img">
+              <img src={featured.data.heroImage} alt={featured.data.title} />
+              <span>Today &middot; {featured.data.title}</span>
+            </a>
+            <ShareButtons
+              pageUrl={featuredPageUrl}
+              imageUrl={featuredImageUrl}
+              title={featured.data.title}
+              description={featured.data.description}
+              downloadName={featured.data.heroImage.split('/').pop()}
+            />
+          </div>
         )}
       </section>
 
@@ -95,6 +120,7 @@ const dayRep = (hub) => posts.find((p) => DAYS[p.data.pubDate.getUTCDay()] === h
   .hero-text h1 { margin: 0 0 0.5em; line-height: 1.1; }
   .hero-text p { color: rgb(var(--gray)); font-size: 1.1em; max-width: 40ch; }
   .hero-img { display: block; text-decoration: none; color: inherit; }
+  .hero-featured { display: flex; flex-direction: column; }
   .hero-img img {
     width: 100%; aspect-ratio: 2 / 3; object-fit: cover;
     border-radius: 16px; box-shadow: var(--box-shadow);

@@ -1,0 +1,152 @@
+---
+interface Props {
+	pageUrl: string;
+	imageUrl: string;
+	title: string;
+	description: string;
+	downloadName?: string;
+}
+
+const { pageUrl, imageUrl, title, description, downloadName } = Astro.props;
+const enc = (s: string) => encodeURIComponent(s);
+const smsBody = `${title} — ${pageUrl}`;
+const pinterest = `https://www.pinterest.com/pin/create/button/?url=${enc(pageUrl)}&media=${enc(imageUrl)}&description=${enc(description)}`;
+const facebook = `https://www.facebook.com/sharer/sharer.php?u=${enc(pageUrl)}`;
+const linkedin = `https://www.linkedin.com/sharing/share-offsite/?url=${enc(pageUrl)}`;
+const sms = `sms:?&body=${enc(smsBody)}`;
+const fileName = downloadName ?? imageUrl.split('/').pop() ?? 'good-morning.png';
+---
+
+<div
+	class="share"
+	data-share
+	data-page-url={pageUrl}
+	data-image-url={imageUrl}
+	data-title={title}
+	data-description={description}
+>
+	<p class="share-label">Share this morning</p>
+	<div class="share-buttons">
+		<a class="share-btn pinterest" href={pinterest} target="_blank" rel="noopener noreferrer">
+			Pinterest
+		</a>
+		<a class="share-btn facebook" href={facebook} target="_blank" rel="noopener noreferrer">
+			Facebook
+		</a>
+		<a class="share-btn linkedin" href={linkedin} target="_blank" rel="noopener noreferrer">
+			LinkedIn
+		</a>
+		<a class="share-btn sms" href={sms}>Text</a>
+		<a class="share-btn download" href={imageUrl} download={fileName}>Save image</a>
+		<button type="button" class="share-btn copy" data-copy>Copy link</button>
+		<button type="button" class="share-btn native" data-native-share hidden>Share…</button>
+	</div>
+	<p class="share-hint">Save the image to post on Instagram, or use Share on your phone.</p>
+</div>
+
+<style>
+	.share {
+		margin: 1.75em 0 0;
+		text-align: center;
+	}
+	.share-label {
+		margin: 0 0 0.75em;
+		font-size: 0.95em;
+		font-weight: 600;
+		color: rgb(var(--black));
+	}
+	.share-hint {
+		margin: 0.75em 0 0;
+		font-size: 0.82em;
+		color: rgb(var(--gray));
+		max-width: 36ch;
+		margin-inline: auto;
+		line-height: 1.4;
+	}
+	.share-buttons {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.45em;
+		justify-content: center;
+	}
+	.share-btn {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 40px;
+		padding: 0.45em 0.85em;
+		border: 1px solid rgb(var(--gray-light));
+		border-radius: 999px;
+		background: white;
+		color: rgb(var(--black));
+		font: inherit;
+		font-size: 0.88em;
+		font-weight: 600;
+		text-decoration: none;
+		cursor: pointer;
+		box-shadow: 0 1px 3px rgba(var(--black), 4%);
+		transition: background 0.15s ease, border-color 0.15s ease;
+	}
+	.share-btn:hover {
+		background: rgb(var(--gray-light));
+		border-color: rgb(var(--gray));
+		color: rgb(var(--black));
+	}
+	.share-btn.pinterest:hover { border-color: #bd081c; }
+	.share-btn.facebook:hover { border-color: #1877f2; }
+	.share-btn.linkedin:hover { border-color: #0a66c2; }
+	.share-btn.copy.copied {
+		border-color: #3aa55d;
+		background: #eef8f1;
+	}
+	.share-btn[hidden] {
+		display: none;
+	}
+	@media (max-width: 720px) {
+		.share-buttons {
+			gap: 0.4em;
+		}
+		.share-btn {
+			font-size: 0.84em;
+			padding: 0.5em 0.75em;
+		}
+	}
+</style>
+
+<script>
+	document.querySelectorAll('[data-share]').forEach((root) => {
+		const pageUrl = root.getAttribute('data-page-url') ?? '';
+		const imageUrl = root.getAttribute('data-image-url') ?? '';
+		const title = root.getAttribute('data-title') ?? '';
+		const description = root.getAttribute('data-description') ?? '';
+
+		const copyBtn = root.querySelector('[data-copy]');
+		copyBtn?.addEventListener('click', async () => {
+			try {
+				await navigator.clipboard.writeText(pageUrl);
+				copyBtn.textContent = 'Copied!';
+				copyBtn.classList.add('copied');
+				window.setTimeout(() => {
+					copyBtn.textContent = 'Copy link';
+					copyBtn.classList.remove('copied');
+				}, 2000);
+			} catch {
+				window.prompt('Copy this link:', pageUrl);
+			}
+		});
+
+		const nativeBtn = root.querySelector('[data-native-share]') as HTMLButtonElement | null;
+		if (nativeBtn && navigator.share) {
+			nativeBtn.hidden = false;
+			nativeBtn.addEventListener('click', async () => {
+				try {
+					await navigator.share({ title, text: description, url: pageUrl });
+				} catch (err) {
+					if ((err as Error).name !== 'AbortError') {
+						console.error(err);
+					}
+				}
+			});
+		}
+	});
+</script>

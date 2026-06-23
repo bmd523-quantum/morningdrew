@@ -5,6 +5,7 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
+import ShareButtons from '../components/ShareButtons.astro';
 import { THEME_BRAND, THEME_CTA, BRANDS } from '../consts';
 
 type Props = CollectionEntry<'blog'>['data'];
@@ -13,17 +14,24 @@ const { title, description, pubDate, updatedDate, heroImage, theme } = Astro.pro
 const brandKey = THEME_BRAND[theme];
 const brand = brandKey ? BRANDS[brandKey] : null;
 const cta = THEME_CTA[theme];
+const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
+const imageUrl = new URL(heroImage, Astro.site).href;
+const downloadName = heroImage.split('/').pop();
 ---
 
 <html lang="en">
 	<head>
-		<BaseHead title={title} description={description} />
+		<BaseHead title={title} description={description} image={heroImage} />
 		<style>
 			main { width: calc(100% - 2em); max-width: 100%; margin: 0; }
 			.hero-image { width: 100%; }
 			.hero-image img {
 				display: block; margin: 0 auto; max-width: 480px; width: 100%;
 				border-radius: 12px; box-shadow: var(--box-shadow);
+			}
+			.share-wrap {
+				width: 720px; max-width: calc(100% - 2em);
+				margin: 0 auto; padding: 0 1em;
 			}
 			.prose {
 				width: 720px; max-width: calc(100% - 2em);
@@ -42,6 +50,15 @@ const cta = THEME_CTA[theme];
 			<article>
 				<div class="hero-image">
 					{heroImage && <img src={heroImage} alt={title} width="1000" height="1500" />}
+				</div>
+				<div class="share-wrap">
+					<ShareButtons
+						pageUrl={pageUrl}
+						imageUrl={imageUrl}
+						title={title}
+						description={description}
+						downloadName={downloadName}
+					/>
 				</div>
 				<div class="prose">
 					<div class="title">

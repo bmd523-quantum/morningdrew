@@ -6,13 +6,24 @@ import HeaderLink from './HeaderLink.astro';
 import { SITE_TITLE } from '../consts';
 ---
 
-<header>
+<header class="site-header">
 	<nav>
 		<a href="/" class="brand">
 			<img src="/logo.png" alt="" class="logo" width="40" height="40" />
 			<span>{SITE_TITLE}</span>
 		</a>
-		<div class="internal-links">
+		<button
+			type="button"
+			class="menu-toggle"
+			aria-label="Open menu"
+			aria-expanded="false"
+			aria-controls="site-nav"
+		>
+			<span class="bar" aria-hidden="true"></span>
+			<span class="bar" aria-hidden="true"></span>
+			<span class="bar" aria-hidden="true"></span>
+		</button>
+		<div id="site-nav" class="internal-links">
 			<HeaderLink href="/">Home</HeaderLink>
 			<HeaderLink href="/coffee/">Coffee</HeaderLink>
 			<HeaderLink href="/sunrise/">Sunrise</HeaderLink>
@@ -20,23 +31,137 @@ import { SITE_TITLE } from '../consts';
 		</div>
 	</nav>
 </header>
+
 <style>
 	header {
-		margin: 0; padding: 0 1em; background: white;
+		margin: 0;
+		padding: 0 1em;
+		background: white;
 		box-shadow: 0 2px 8px rgba(var(--black), 5%);
+		position: relative;
+		z-index: 50;
 	}
 	nav {
-		display: flex; align-items: center; justify-content: space-between;
-		max-width: 1000px; margin: 0 auto; flex-wrap: wrap;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		max-width: 1000px;
+		margin: 0 auto;
+		gap: 1em;
 	}
 	.brand {
-		display: flex; align-items: center; gap: 0.55em;
-		text-decoration: none; color: var(--black);
-		padding: 0.5em 0; font-weight: 700; font-size: 1.15em;
+		display: flex;
+		align-items: center;
+		gap: 0.55em;
+		text-decoration: none;
+		color: var(--black);
+		padding: 0.5em 0;
+		font-weight: 700;
+		font-size: 1.15em;
+		flex-shrink: 0;
 	}
-	.logo { display: block; border-radius: 8px; }
-	.internal-links { display: flex; gap: 0.25em; flex-wrap: wrap; }
+	.logo {
+		display: block;
+		border-radius: 8px;
+	}
+	.internal-links {
+		display: flex;
+		align-items: center;
+		gap: 0.25em;
+	}
+	.menu-toggle {
+		display: none;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		gap: 5px;
+		width: 44px;
+		height: 44px;
+		padding: 0;
+		border: none;
+		background: transparent;
+		cursor: pointer;
+		flex-shrink: 0;
+		border-radius: 8px;
+	}
+	.menu-toggle:hover {
+		background: rgb(var(--gray-light));
+	}
+	.bar {
+		display: block;
+		width: 22px;
+		height: 2px;
+		background: rgb(var(--black));
+		border-radius: 1px;
+		transition: transform 0.2s ease, opacity 0.2s ease;
+	}
+	header.nav-open .menu-toggle .bar:nth-child(1) {
+		transform: translateY(7px) rotate(45deg);
+	}
+	header.nav-open .menu-toggle .bar:nth-child(2) {
+		opacity: 0;
+	}
+	header.nav-open .menu-toggle .bar:nth-child(3) {
+		transform: translateY(-7px) rotate(-45deg);
+	}
+
 	@media (max-width: 720px) {
-		nav { justify-content: center; gap: 0.25em; padding: 0.5em 0; }
+		.menu-toggle {
+			display: flex;
+		}
+		.internal-links {
+			display: none;
+			position: absolute;
+			top: 100%;
+			left: 0;
+			right: 0;
+			flex-direction: column;
+			align-items: stretch;
+			gap: 0;
+			background: white;
+			box-shadow: 0 8px 20px rgba(var(--black), 8%);
+			padding: 0.25em 1em 0.75em;
+			border-top: 1px solid rgb(var(--gray-light));
+		}
+		header.nav-open .internal-links {
+			display: flex;
+		}
+		.internal-links :global(a) {
+			display: block;
+			padding: 0.85em 0.25em;
+			font-size: 1.05em;
+			color: rgb(var(--black));
+			border-bottom: 1px solid rgb(var(--gray-light));
+		}
+		.internal-links :global(a:last-child) {
+			border-bottom: none;
+		}
 	}
 </style>
+
+<script>
+	const header = document.querySelector('.site-header');
+	const toggle = header?.querySelector('.menu-toggle');
+	const menu = header?.querySelector('#site-nav');
+
+	function setOpen(open: boolean) {
+		header?.classList.toggle('nav-open', open);
+		toggle?.setAttribute('aria-expanded', String(open));
+		toggle?.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+	}
+
+	toggle?.addEventListener('click', () => {
+		setOpen(!header?.classList.contains('nav-open'));
+	});
+
+	menu?.querySelectorAll('a').forEach((link) => {
+		link.addEventListener('click', () => setOpen(false));
+	});
+
+	document.addEventListener('keydown', (e) => {
+		if (e.key === 'Escape' && header?.classList.contains('nav-open')) {
+			setOpen(false);
+			toggle?.focus();
+		}
+	});
+</script>
