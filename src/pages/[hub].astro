@@ -1,9 +1,6 @@
 ---
-// Place at: src/pages/[hub].astro
-// Generates ALL hubs from one file: theme hubs (/coffee ...) and weekday
-// hubs (/monday ...). Posts flow in by their `theme` field or by the
-// weekday of their pubDate — no manual upkeep. Slugs never collide
-// (theme names vs weekday names), and /about, /blog take precedence.
+// Place at: src/pages/[hub].astro (replaces current — fixes "DAYS is not defined")
+// getStaticPaths runs in an isolated scope, so DAYS must be declared INSIDE it.
 import { getCollection } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
@@ -11,10 +8,8 @@ import Footer from '../components/Footer.astro';
 import { HUBS, DAY_HUBS } from '../hubs';
 import { SITE_TITLE } from '../consts';
 
-const DAYS = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-const weekdayOf = (d) => DAYS[d.getUTCDay()]; // pubDate is UTC midnight -> stable
-
 export async function getStaticPaths() {
+  const DAYS = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
   const posts = await getCollection('blog');
   const byDate = (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf();
 
