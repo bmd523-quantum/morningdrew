@@ -1,0 +1,59 @@
+---
+// Place at: src/pages/era/[era].astro
+// One browsable page per distinct `era` flag, e.g. /era/launch/.
+// Folder structure is irrelevant — this sorts purely by the metadata flag.
+import { getCollection } from 'astro:content';
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { SITE_TITLE } from '../../consts';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  const eras = [...new Set(posts.map((p) => p.data.era))];
+  return eras.map((era) => ({
+    params: { era },
+    props: {
+      era,
+      posts: posts
+        .filter((p) => p.data.era === era)
+        .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()),
+    },
+  }));
+}
+
+const { era, posts } = Astro.props;
+const label = era.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
+---
+
+<html lang="en">
+  <head>
+    <BaseHead title={`${label} era | ${SITE_TITLE}`} description={`Good morning pictures in the ${label} era.`} />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <h1>{label} era</h1>
+      <p class="intro">Every good morning picture drawn in the {label} era ({posts.length}).</p>
+      <div class="grid">
+        {posts.map((p) => (
+          <a href={`/blog/${p.id}/`} class="card">
+            <img src={p.data.heroImage} alt={p.data.title} loading="lazy" />
+            <span>{p.data.title}</span>
+          </a>
+        ))}
+      </div>
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style>
+  main { width: 960px; max-width: calc(100% - 2em); margin: auto; padding: 2em 1em; }
+  h1 { margin: 0 0 0.25em; }
+  .intro { color: rgb(var(--gray)); margin: 0 0 2em; }
+  .grid { display: grid; gap: 1.25em; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+  .card { display: block; text-decoration: none; color: inherit; }
+  .card img { width: 100%; aspect-ratio: 2 / 3; object-fit: cover; border-radius: 12px; box-shadow: var(--box-shadow); }
+  .card span { display: block; margin-top: 0.5em; font-size: 0.95em; }
+</style>
