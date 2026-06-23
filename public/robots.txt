@@ -5,3 +5,5 @@ User-agent: *
 Allow: /
 
 Sitemap: https://goodmorning.pics/sitemap-index.xml
+
+# IndexNow key: https://goodmorning.pics/b6b611241b904d348a4855288520bc4e.txt
