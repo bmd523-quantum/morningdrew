@@ -1,0 +1,83 @@
+---
+// Place at: src/pages/[hub].astro
+// Generates ALL hubs from one file: theme hubs (/coffee ...) and weekday
+// hubs (/monday ...). Posts flow in by their `theme` field or by the
+// weekday of their pubDate — no manual upkeep. Slugs never collide
+// (theme names vs weekday names), and /about, /blog take precedence.
+import { getCollection } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { HUBS, DAY_HUBS } from '../hubs';
+import { SITE_TITLE } from '../consts';
+
+const DAYS = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+const weekdayOf = (d) => DAYS[d.getUTCDay()]; // pubDate is UTC midnight -> stable
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  const byDate = (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf();
+
+  const themePaths = HUBS.map((hub) => ({
+    params: { hub: hub.slug },
+    props: {
+      hub,
+      posts: posts.filter((p) => hub.themes.includes(p.data.theme)).sort(byDate),
+    },
+  }));
+
+  const dayPaths = DAY_HUBS.map((hub) => ({
+    params: { hub: hub.slug },
+    props: {
+      hub,
+      posts: posts.filter((p) => DAYS[p.data.pubDate.getUTCDay()] === hub.weekday).sort(byDate),
+    },
+  }));
+
+  return [...themePaths, ...dayPaths];
+}
+
+const { hub, posts } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <BaseHead title={`${hub.title} | ${SITE_TITLE}`} description={hub.intro} />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <h1>{hub.title}</h1>
+      <p class="intro">{hub.intro}</p>
+
+      {posts.length === 0 ? (
+        <p class="empty">New drawings coming soon — check back tomorrow morning.</p>
+      ) : (
+        <div class="grid">
+          {posts.map((p) => (
+            <a href={`/blog/${p.id}/`} class="card">
+              <img src={p.data.heroImage} alt={p.data.title} loading="lazy" />
+              <span>{p.data.title}</span>
+            </a>
+          ))}
+        </div>
+      )}
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style>
+  main { width: 960px; max-width: calc(100% - 2em); margin: auto; padding: 2em 1em; }
+  h1 { margin: 0 0 0.25em; }
+  .intro { color: rgb(var(--gray)); max-width: 60ch; margin: 0 0 2em; }
+  .empty { color: rgb(var(--gray)); }
+  .grid { display: grid; gap: 1.25em; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+  .card { display: block; text-decoration: none; color: inherit; }
+  .card img {
+    width: 100%; aspect-ratio: 2 / 3; object-fit: cover;
+    border-radius: 12px; box-shadow: var(--box-shadow); transition: transform 0.15s ease;
+  }
+  .card:hover img { transform: translateY(-3px); }
+  .card span { display: block; margin-top: 0.5em; font-size: 0.95em; }
+</style>

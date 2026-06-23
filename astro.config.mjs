@@ -1,35 +1,20 @@
-// @ts-check
-
+// Place at: astro.config.mjs (replaces the broken one)
+// Astro 6 graduated the Fonts API to a top-level `fonts` block. The blog
+// starter's BaseHead uses the Atkinson Hyperlegible font via the
+// `--font-atkinson` CSS variable, so it MUST be declared here — otherwise
+// you get "FontFamilyNotFound: --font-atkinson".
+import { defineConfig, fontProviders } from 'astro/config';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
-import { defineConfig, fontProviders } from 'astro/config';
 
-// https://astro.build/config
 export default defineConfig({
-	site: 'https://example.com',
-	integrations: [mdx(), sitemap()],
-	fonts: [
-		{
-			provider: fontProviders.local(),
-			name: 'Atkinson',
-			cssVariable: '--font-atkinson',
-			fallbacks: ['sans-serif'],
-			options: {
-				variants: [
-					{
-						src: ['./src/assets/fonts/atkinson-regular.woff'],
-						weight: 400,
-						style: 'normal',
-						display: 'swap',
-					},
-					{
-						src: ['./src/assets/fonts/atkinson-bold.woff'],
-						weight: 700,
-						style: 'normal',
-						display: 'swap',
-					},
-				],
-			},
-		},
-	],
+  site: 'https://goodmorning.pics',
+  integrations: [mdx(), sitemap()],
+  fonts: [
+    {
+      provider: fontProviders.google(),
+      name: 'Atkinson Hyperlegible',
+      cssVariable: '--font-atkinson',
+    },
+  ],
 });
