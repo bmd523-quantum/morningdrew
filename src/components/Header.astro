@@ -27,6 +27,9 @@ import { SITE_TITLE } from '../consts';
 			<HeaderLink href="/">Home</HeaderLink>
 			<HeaderLink href="/coffee/">Coffee</HeaderLink>
 			<HeaderLink href="/sunrise/">Sunrise</HeaderLink>
+			<HeaderLink href="/breakfast/">Breakfast</HeaderLink>
+			<HeaderLink href="/camp/">Camp</HeaderLink>
+			<HeaderLink href="/quotes/">Quotes</HeaderLink>
 			<HeaderLink href="/about/">About</HeaderLink>
 		</div>
 	</nav>
@@ -48,6 +51,7 @@ import { SITE_TITLE } from '../consts';
 		max-width: 1000px;
 		margin: 0 auto;
 		gap: 1em;
+		flex-wrap: wrap;
 	}
 	.brand {
 		display: flex;
@@ -67,6 +71,7 @@ import { SITE_TITLE } from '../consts';
 	.internal-links {
 		display: flex;
 		align-items: center;
+		flex-wrap: wrap;
 		gap: 1.25em;
 	}
 	.internal-links :global(a) {

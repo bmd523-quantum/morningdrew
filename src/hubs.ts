@@ -36,11 +36,11 @@ export const HUBS = [
       'Good morning from the great outdoors. Misty campsites, quiet sunrises over the trees, and the best part of any trip — the early morning.',
   },
   {
-    slug: 'motivation',
-    title: 'Good Morning Motivation',
+    slug: 'quotes',
+    title: 'Good Morning Quotes',
     themes: ['motivation'],
     intro:
-      'Uplifting good morning art and a little encouragement to begin the day. A fresh start and a hopeful scene, posted every morning.',
+      'Uplifting good morning quotes to share and start the day right. A fresh original good morning quote every week, hand-lettered in a warm retro style.',
   },
 ] as const;
 

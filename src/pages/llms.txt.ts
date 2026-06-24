@@ -16,7 +16,7 @@ export const GET: APIRoute = async () => {
 		'',
 		`> ${SITE_DESCRIPTION} Original retro hand-drawn good morning pictures — one per calendar day — with shareable WebP images for Pinterest, social media, and messaging.`,
 		'',
-		'Each post is a dated drawing for a specific weekday (for example, Happy Tuesday). Browse by mood (coffee, sunrise, camp, breakfast, motivation) or by day of the week. Use the share buttons on each post to save or share the image.',
+		'Each post is a dated drawing for a specific weekday (for example, Happy Tuesday). Browse by mood (coffee, sunrise, camp, breakfast, quotes) or by day of the week. Use the share buttons on each post to save or share the image.',
 		'',
 		'## Main pages',
 		`- [Home](${SITE_URL}/): Today's featured drawing and browse hubs.`,
