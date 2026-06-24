@@ -1,6 +1,14 @@
 {
   "crons": [
     {
+      "path": "/api/cron/rebuild",
+      "schedule": "0 4 * * *"
+    },
+    {
+      "path": "/api/cron/rebuild",
+      "schedule": "0 5 * * *"
+    },
+    {
       "path": "/api/indexnow",
       "schedule": "0 6 * * *"
     }
