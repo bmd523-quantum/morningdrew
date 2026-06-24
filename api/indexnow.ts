@@ -1,13 +1,12 @@
 /**
  * Daily IndexNow submission (Bing, Yandex, etc.) for all public URLs.
  * Verify ownership: public/{INDEXNOW_KEY}.txt — https://www.indexnow.org/
- * Cron + manual GET/POST. Optional INDEXNOW_KEY env must match the .txt filename.
+ * Cron + manual GET/POST. Tries multiple endpoints; does not fail on 403 from one.
  */
 import {
-	SITE_ORIGIN,
-	collectUrlsFromSitemapIndex,
+	collectUrlsFromLiveSitemap,
 	getIndexNowKey,
-	submitToIndexNow,
+	pingIndexNow,
 } from '../lib/indexnow.mjs';
 
 export default async function handler(req, res) {
@@ -19,11 +18,7 @@ export default async function handler(req, res) {
 
 	let urlList;
 	try {
-		const indexRes = await fetch(`${SITE_ORIGIN}/sitemap-index.xml`);
-		if (!indexRes.ok) {
-			throw new Error(`sitemap-index.xml returned ${indexRes.status}`);
-		}
-		urlList = await collectUrlsFromSitemapIndex(await indexRes.text());
+		urlList = await collectUrlsFromLiveSitemap();
 	} catch (e) {
 		console.error('indexnow: failed to collect URLs', e);
 		res.status(500).json({ ok: false, message: 'Failed to collect URLs' });
@@ -35,18 +30,13 @@ export default async function handler(req, res) {
 		return;
 	}
 
-	try {
-		const result = await submitToIndexNow(urlList);
-		res.status(200).json({
-			ok: true,
-			submitted: result.submitted,
-			key: getIndexNowKey(),
-			indexNowHttpStatus: result.httpStatus,
-		});
-	} catch (e) {
-		console.error('indexnow: request failed', e);
-		res.status(502).json({ ok: false, message: e.message || 'IndexNow request failed' });
-	}
+	const out = await pingIndexNow(urlList);
+	res.status(200).json({
+		ok: out.anyOk,
+		submitted: out.submitted,
+		key: getIndexNowKey(),
+		endpoints: out.results,
+	});
 }
 
 export const config = {
