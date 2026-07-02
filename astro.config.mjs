@@ -6,6 +6,9 @@
 import { defineConfig, fontProviders } from 'astro/config';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
+import { loadSitemapLastmodMap, sitemapLastmodForUrl } from './src/lib/sitemapLastmod.js';
+
+const sitemapLastmod = loadSitemapLastmodMap();
 
 export default defineConfig({
   site: 'https://goodmorning.pics',
@@ -14,9 +17,11 @@ export default defineConfig({
     sitemap({
       changefreq: 'weekly',
       priority: 0.7,
-      lastmod: new Date(),
       serialize(item) {
         const path = new URL(item.url).pathname;
+        const lastmod = sitemapLastmodForUrl(item.url, sitemapLastmod);
+        if (lastmod) item.lastmod = lastmod;
+
         if (path === '/') {
           return { ...item, changefreq: 'daily', priority: 1.0 };
         }
