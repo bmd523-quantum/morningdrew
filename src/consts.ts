@@ -5,6 +5,8 @@
 export const SITE_TITLE = 'Good Morning Pics';
 export const SITE_DESCRIPTION = 'A new drawing every morning.';
 export const SITE_URL = 'https://goodmorning.pics';
+/** Default share preview for homepage, hubs, and static pages (blog posts use heroImage). */
+export const DEFAULT_OG_IMAGE = '/og-image.png';
 export const GA_MEASUREMENT_ID = 'G-6R6LVSK051';
 
 // The three properties Morning Drew points back to.

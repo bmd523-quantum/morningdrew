@@ -36,7 +36,7 @@ export default defineConfig({
             path.startsWith('/friday') || path.startsWith('/saturday') ||
             path.startsWith('/sunday') || path.startsWith('/coffee') ||
             path.startsWith('/sunrise') || path.startsWith('/breakfast') ||
-            path.startsWith('/camp') || path.startsWith('/motivation')) {
+            path.startsWith('/camp') || path.startsWith('/quotes')) {
           return { ...item, changefreq: 'weekly', priority: 0.75 };
         }
         return item;

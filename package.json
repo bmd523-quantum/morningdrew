@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "prebuild": "node scripts/build-sitemap-lastmod.mjs",
+    "prebuild": "node ./bin/build-sitemap-lastmod.mjs",
     "postbuild": "node ./bin/submit-indexnow.mjs",
     "preview": "astro preview",
     "astro": "astro"
