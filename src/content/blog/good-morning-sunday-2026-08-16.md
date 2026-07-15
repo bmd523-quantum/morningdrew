@@ -4,6 +4,7 @@ description: 'A retro hand-drawn good morning sunday picture with an uplifting g
 pubDate: '2026-08-16'
 heroImage: '/drawings/good-morning-sunday-2026-08-16.webp'
 theme: 'motivation'
+scene: "a winding path leading uphill toward a rising sun"
 style: 'retro-midcentury'
 era: 'launch'
 ---

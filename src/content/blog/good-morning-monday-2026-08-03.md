@@ -4,6 +4,7 @@ description: 'A retro hand-drawn good morning monday picture with a warm cup of 
 pubDate: '2026-08-03'
 heroImage: '/drawings/good-morning-monday-2026-08-03.webp'
 theme: 'coffee'
+scene: "a coffee cup on a stack of books by a window with hanging plants"
 style: 'retro-midcentury'
 era: 'launch'
 ---

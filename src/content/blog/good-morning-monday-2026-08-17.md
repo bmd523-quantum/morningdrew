@@ -4,6 +4,7 @@ description: 'A retro hand-drawn good morning monday picture with a warm cup of 
 pubDate: '2026-08-17'
 heroImage: '/drawings/good-morning-monday-2026-08-17.webp'
 theme: 'coffee'
+scene: "a coffee mug beside reading glasses and a folded newspaper"
 style: 'retro-midcentury'
 era: 'launch'
 ---

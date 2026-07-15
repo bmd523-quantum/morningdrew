@@ -4,6 +4,7 @@ description: 'A retro hand-drawn good morning tuesday picture over a calm sunris
 pubDate: '2026-08-25'
 heroImage: '/drawings/good-morning-tuesday-2026-08-25.webp'
 theme: 'sunrise'
+scene: "the sun rising behind rolling farmland with a winding path"
 style: 'retro-midcentury'
 era: 'launch'
 ---

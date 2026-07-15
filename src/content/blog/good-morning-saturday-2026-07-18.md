@@ -4,6 +4,7 @@ description: 'A retro hand-drawn good morning saturday picture with a cozy break
 pubDate: '2026-07-18'
 heroImage: '/drawings/good-morning-saturday-2026-07-18.webp'
 theme: 'breakfast'
+scene: "fresh croissants and jam on a sunny kitchen table"
 ---
 
 A full plate and a sunny window — that's a morning done right. Wishing you a wonderful Saturday.

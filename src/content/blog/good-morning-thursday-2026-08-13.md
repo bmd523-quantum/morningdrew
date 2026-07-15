@@ -4,6 +4,7 @@ description: 'A retro hand-drawn good morning thursday picture with a warm cup o
 pubDate: '2026-08-13'
 heroImage: '/drawings/good-morning-thursday-2026-08-13.webp'
 theme: 'coffee'
+scene: "a coffee pot pouring into a mug with steam rising and a warm glow"
 style: 'retro-midcentury'
 era: 'launch'
 ---

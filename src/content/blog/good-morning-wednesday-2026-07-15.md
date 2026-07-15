@@ -4,6 +4,7 @@ description: 'A retro hand-drawn good morning wednesday picture with a cozy brea
 pubDate: '2026-07-15'
 heroImage: '/drawings/good-morning-wednesday-2026-07-15.webp'
 theme: 'breakfast'
+scene: "a warm breakfast table with a stack of pancakes, fruit, and juice"
 ---
 
 A good morning starts with something warm on the table and a minute to enjoy it. No need to hurry. Wishing you a wonderful Wednesday.

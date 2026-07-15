@@ -4,6 +4,7 @@ description: 'A retro hand-drawn good morning thursday picture with a warm cup o
 pubDate: '2026-07-23'
 heroImage: '/drawings/good-morning-thursday-2026-07-23.webp'
 theme: 'coffee'
+scene: "a moka pot on a stovetop with a waiting cup in early light"
 ---
 
 Pour something warm, take a slow breath, and let the day come to you. There's no rush this morning. Wishing you a wonderful Thursday.

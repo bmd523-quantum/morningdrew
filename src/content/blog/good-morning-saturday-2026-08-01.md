@@ -4,6 +4,7 @@ description: 'A retro hand-drawn good morning saturday picture with a hearty bre
 pubDate: '2026-08-01'
 heroImage: '/drawings/good-morning-saturday-2026-08-01.webp'
 theme: 'breakfast-chili'
+scene: "a bowl of chili with avocado and egg beside a cup of coffee at a sunrise window"
 style: 'retro-midcentury'
 era: 'launch'
 ---

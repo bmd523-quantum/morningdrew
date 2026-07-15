@@ -4,6 +4,7 @@ description: 'A retro hand-drawn good morning friday picture from a peaceful cam
 pubDate: '2026-07-31'
 heroImage: '/drawings/good-morning-friday-2026-07-31.webp'
 theme: 'camp'
+scene: "a hammock between two trees with a mug nearby and morning sun filtering"
 ---
 
 Mornings feel bigger outdoors — fresh air, quiet light, and the whole day waiting. Breathe it in. Wishing you a wonderful Friday.

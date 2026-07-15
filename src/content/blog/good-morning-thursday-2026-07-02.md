@@ -4,6 +4,7 @@ description: 'A retro hand-drawn good morning thursday picture with a warm cup o
 pubDate: '2026-07-02'
 heroImage: '/drawings/good-morning-thursday-2026-07-02.webp'
 theme: 'coffee'
+scene: "a cup of coffee on a balcony railing overlooking rolling hills at dawn"
 ---
 
 Wrap your hands around something warm and ease into the day. Good things are ahead. Wishing you a wonderful Thursday.

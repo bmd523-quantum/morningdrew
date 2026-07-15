@@ -4,6 +4,7 @@ description: 'A retro hand-drawn good morning wednesday picture with a cozy brea
 pubDate: '2026-08-26'
 heroImage: '/drawings/good-morning-wednesday-2026-08-26.webp'
 theme: 'breakfast'
+scene: "a breakfast board of bread, cheese, and fruit on a wooden table"
 style: 'retro-midcentury'
 era: 'launch'
 ---

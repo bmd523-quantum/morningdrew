@@ -4,6 +4,7 @@ description: 'A retro hand-drawn good morning tuesday picture over a calm sunris
 pubDate: '2026-08-11'
 heroImage: '/drawings/good-morning-tuesday-2026-08-11.webp'
 theme: 'sunrise'
+scene: "a sun rising between two hills with a meandering river"
 style: 'retro-midcentury'
 era: 'launch'
 ---

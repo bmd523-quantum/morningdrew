@@ -4,6 +4,7 @@ description: 'A retro hand-drawn good morning monday picture with a warm cup of 
 pubDate: '2026-08-10'
 heroImage: '/drawings/good-morning-monday-2026-08-10.webp'
 theme: 'coffee'
+scene: "a French press and a single cup on a kitchen counter at sunrise"
 style: 'retro-midcentury'
 era: 'launch'
 ---

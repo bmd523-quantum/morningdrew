@@ -4,6 +4,7 @@ description: 'A retro hand-drawn good morning sunday picture with an uplifting g
 pubDate: '2026-08-09'
 heroImage: '/drawings/good-morning-sunday-2026-08-09.webp'
 theme: 'motivation'
+scene: "a sprout breaking through soil with sunbeams above"
 style: 'retro-midcentury'
 era: 'launch'
 ---

@@ -4,6 +4,7 @@ description: 'A retro hand-drawn good morning tuesday picture over a calm sunris
 pubDate: '2026-08-04'
 heroImage: '/drawings/good-morning-tuesday-2026-08-04.webp'
 theme: 'sunrise'
+scene: "a sunrise over a still lake with soft reflections"
 style: 'retro-midcentury'
 era: 'launch'
 ---

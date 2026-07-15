@@ -4,6 +4,7 @@ description: 'A retro hand-drawn good morning saturday picture with a cozy break
 pubDate: '2026-08-08'
 heroImage: '/drawings/good-morning-saturday-2026-08-08.webp'
 theme: 'breakfast'
+scene: "a warm breakfast table with a stack of pancakes, fruit, and juice"
 style: 'retro-midcentury'
 era: 'launch'
 ---

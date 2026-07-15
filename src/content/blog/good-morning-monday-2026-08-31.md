@@ -4,6 +4,7 @@ description: 'A retro hand-drawn good morning monday picture with a warm cup of 
 pubDate: '2026-08-31'
 heroImage: '/drawings/good-morning-monday-2026-08-31.webp'
 theme: 'coffee'
+scene: "a cup of coffee on a balcony railing overlooking rolling hills at dawn"
 style: 'retro-midcentury'
 era: 'launch'
 ---

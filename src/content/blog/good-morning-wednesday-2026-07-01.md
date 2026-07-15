@@ -4,6 +4,7 @@ description: 'A retro hand-drawn good morning wednesday picture with a cozy brea
 pubDate: '2026-07-01'
 heroImage: '/drawings/good-morning-wednesday-2026-07-01.webp'
 theme: 'breakfast'
+scene: "avocado toast and a smoothie on a bright kitchen counter"
 ---
 
 Breakfast tastes better when you take your time. Here's to a cozy, unhurried start. Wishing you a wonderful Wednesday.

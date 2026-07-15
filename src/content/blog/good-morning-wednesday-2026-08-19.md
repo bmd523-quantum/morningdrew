@@ -4,6 +4,7 @@ description: 'A retro hand-drawn good morning wednesday picture with a cozy brea
 pubDate: '2026-08-19'
 heroImage: '/drawings/good-morning-wednesday-2026-08-19.webp'
 theme: 'breakfast'
+scene: "a bagel with spread and a cup of tea beside a morning newspaper"
 style: 'retro-midcentury'
 era: 'launch'
 ---

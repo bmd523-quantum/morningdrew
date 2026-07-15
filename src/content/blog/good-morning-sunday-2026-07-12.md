@@ -4,6 +4,7 @@ description: 'A retro hand-drawn good morning sunday picture with an uplifting g
 pubDate: '2026-07-12'
 heroImage: '/drawings/good-morning-sunday-2026-07-12.webp'
 theme: 'motivation'
+scene: "an open window with curtains and sunlight over a vase of flowers"
 style: 'retro-midcentury'
 era: 'launch'
 ---

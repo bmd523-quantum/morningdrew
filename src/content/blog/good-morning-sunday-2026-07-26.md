@@ -4,6 +4,7 @@ description: 'A retro hand-drawn good morning sunday picture with an uplifting g
 pubDate: '2026-07-26'
 heroImage: '/drawings/good-morning-sunday-2026-07-26.webp'
 theme: 'motivation'
+scene: "a hot air balloon drifting over hills at sunrise"
 style: 'retro-midcentury'
 era: 'launch'
 ---

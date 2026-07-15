@@ -4,6 +4,7 @@ description: 'A retro hand-drawn good morning saturday picture with a cozy break
 pubDate: '2026-07-25'
 heroImage: '/drawings/good-morning-saturday-2026-07-25.webp'
 theme: 'breakfast'
+scene: "avocado toast and a smoothie on a bright kitchen counter"
 ---
 
 Breakfast tastes better when you take your time. Here's to a cozy, unhurried start. Wishing you a wonderful Saturday.

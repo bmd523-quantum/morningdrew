@@ -4,6 +4,7 @@ description: 'A retro hand-drawn good morning friday picture from a peaceful cam
 pubDate: '2026-08-07'
 heroImage: '/drawings/good-morning-friday-2026-08-07.webp'
 theme: 'camp'
+scene: "a canoe at the water's edge at dawn with a misty forest"
 style: 'retro-midcentury'
 era: 'launch'
 ---

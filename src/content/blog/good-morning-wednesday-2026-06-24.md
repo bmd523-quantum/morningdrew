@@ -4,6 +4,7 @@ description: 'A retro hand-drawn good morning wednesday picture with a cozy brea
 pubDate: '2026-06-24'
 heroImage: '/drawings/good-morning-wednesday-2026-06-24.webp'
 theme: 'breakfast'
+scene: "fresh croissants and jam on a sunny kitchen table"
 ---
 
 A full plate and a sunny window — that's a morning done right. Wishing you a wonderful Wednesday.

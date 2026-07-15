@@ -4,6 +4,7 @@ description: 'A retro hand-drawn good morning wednesday picture with a cozy brea
 pubDate: '2026-08-05'
 heroImage: '/drawings/good-morning-wednesday-2026-08-05.webp'
 theme: 'breakfast'
+scene: "a fruit bowl and a basket of muffins on a farmhouse table"
 style: 'retro-midcentury'
 era: 'launch'
 ---

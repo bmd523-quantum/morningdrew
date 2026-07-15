@@ -4,6 +4,7 @@ description: 'A retro hand-drawn good morning thursday picture with a warm cup o
 pubDate: '2026-08-06'
 heroImage: '/drawings/good-morning-thursday-2026-08-06.webp'
 theme: 'coffee'
+scene: "a latte glass on a cafe table with a sunrise through the window"
 style: 'retro-midcentury'
 era: 'launch'
 ---

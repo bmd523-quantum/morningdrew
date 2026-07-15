@@ -4,6 +4,7 @@ description: 'A retro hand-drawn good morning saturday picture with a cozy break
 pubDate: '2026-08-29'
 heroImage: '/drawings/good-morning-saturday-2026-08-29.webp'
 theme: 'breakfast'
+scene: "a fruit bowl and a basket of muffins on a farmhouse table"
 style: 'retro-midcentury'
 era: 'launch'
 ---

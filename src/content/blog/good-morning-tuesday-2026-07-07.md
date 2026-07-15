@@ -4,6 +4,7 @@ description: 'A retro hand-drawn good morning tuesday picture over a calm sunris
 pubDate: '2026-07-07'
 heroImage: '/drawings/good-morning-tuesday-2026-07-07.webp'
 theme: 'sunrise'
+scene: "a sunrise over ocean waves with simple geometric birds"
 ---
 
 Every sunrise is a fresh start and a clean page. Here's to a bright, easy day. Wishing you a wonderful Tuesday.

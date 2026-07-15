@@ -4,6 +4,7 @@ description: 'A retro hand-drawn good morning saturday picture with a hearty bre
 pubDate: '2026-07-04'
 heroImage: '/drawings/good-morning-saturday-2026-07-04.webp'
 theme: 'breakfast-chili'
+scene: "a bowl of chili with herbs on a wooden table in morning light"
 ---
 
 A warm, filling start for a day with a lot ahead. Fuel up — you've got this. Wishing you a wonderful Saturday.

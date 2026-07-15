@@ -4,6 +4,7 @@ description: 'A retro hand-drawn good morning friday picture from a peaceful cam
 pubDate: '2026-07-24'
 heroImage: '/drawings/good-morning-friday-2026-07-24.webp'
 theme: 'camp'
+scene: "a camp mug on a log next to a smoking campfire at dawn"
 ---
 
 There's nothing like waking up to birdsong and a campfire. Here's to a morning close to nature. Wishing you a wonderful Friday.

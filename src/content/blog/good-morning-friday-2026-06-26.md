@@ -4,6 +4,7 @@ description: 'A retro hand-drawn good morning friday picture from a peaceful cam
 pubDate: '2026-06-26'
 heroImage: '/drawings/good-morning-friday-2026-06-26.webp'
 theme: 'camp'
+scene: "a kettle on a campfire grate with mountains and morning mist"
 ---
 
 There's nothing like waking up to birdsong and a campfire. Here's to a morning close to nature. Wishing you a wonderful Friday.

@@ -4,6 +4,7 @@ description: 'A retro hand-drawn good morning friday picture from a peaceful cam
 pubDate: '2026-08-28'
 heroImage: '/drawings/good-morning-friday-2026-08-28.webp'
 theme: 'camp'
+scene: "a lantern and coffee pot on a picnic table at a campsite in early light"
 style: 'retro-midcentury'
 era: 'launch'
 ---

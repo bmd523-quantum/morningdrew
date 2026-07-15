@@ -4,6 +4,7 @@ description: 'A retro hand-drawn good morning saturday picture with a cozy break
 pubDate: '2026-08-22'
 heroImage: '/drawings/good-morning-saturday-2026-08-22.webp'
 theme: 'breakfast'
+scene: "a plate of eggs and toast with a glass of orange juice in morning sun"
 style: 'retro-midcentury'
 era: 'launch'
 ---

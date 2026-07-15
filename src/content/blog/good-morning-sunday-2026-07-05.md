@@ -4,6 +4,7 @@ description: 'A retro hand-drawn good morning sunday picture with an uplifting g
 pubDate: '2026-07-05'
 heroImage: '/drawings/good-morning-sunday-2026-07-05.webp'
 theme: 'motivation'
+scene: "a small bird mid-song on a branch against a bright sky"
 style: 'retro-midcentury'
 era: 'launch'
 ---

@@ -4,6 +4,7 @@ description: 'A retro hand-drawn good morning thursday picture with a warm cup o
 pubDate: '2026-07-16'
 heroImage: '/drawings/good-morning-thursday-2026-07-16.webp'
 theme: 'coffee'
+scene: "a steaming mug of coffee on a wooden table next to an open book"
 ---
 
 The best mornings start with a quiet cup and a moment to yourself. Here's to a calm, steady start. Wishing you a wonderful Thursday.

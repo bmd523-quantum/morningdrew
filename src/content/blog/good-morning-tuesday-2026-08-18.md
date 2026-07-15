@@ -4,6 +4,7 @@ description: 'A retro hand-drawn good morning tuesday picture over a calm sunris
 pubDate: '2026-08-18'
 heroImage: '/drawings/good-morning-tuesday-2026-08-18.webp'
 theme: 'sunrise'
+scene: "a sunrise over a desert with simple cacti and distant mesas"
 style: 'retro-midcentury'
 era: 'launch'
 ---

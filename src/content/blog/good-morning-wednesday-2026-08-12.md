@@ -4,6 +4,7 @@ description: 'A retro hand-drawn good morning wednesday picture with a cozy brea
 pubDate: '2026-08-12'
 heroImage: '/drawings/good-morning-wednesday-2026-08-12.webp'
 theme: 'breakfast'
+scene: "a bowl of granola and yogurt with sliced fruit by a window"
 style: 'retro-midcentury'
 era: 'launch'
 ---

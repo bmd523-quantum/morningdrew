@@ -4,6 +4,7 @@ description: 'A retro hand-drawn good morning friday picture from a peaceful cam
 pubDate: '2026-08-21'
 heroImage: '/drawings/good-morning-friday-2026-08-21.webp'
 theme: 'camp'
+scene: "a backpack and bedroll at a tent entrance as the sun crests the hills"
 style: 'retro-midcentury'
 era: 'launch'
 ---

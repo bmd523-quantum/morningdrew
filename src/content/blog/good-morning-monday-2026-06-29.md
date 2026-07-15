@@ -4,6 +4,7 @@ description: 'A retro hand-drawn good morning monday picture with a warm cup of 
 pubDate: '2026-06-29'
 heroImage: '/drawings/good-morning-monday-2026-06-29.webp'
 theme: 'coffee'
+scene: "a moka pot on a stovetop with a waiting cup in early light"
 ---
 
 Pour something warm, take a slow breath, and let the day come to you. There's no rush this morning. Wishing you a wonderful Monday.
